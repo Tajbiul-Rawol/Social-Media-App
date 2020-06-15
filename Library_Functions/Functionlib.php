@@ -90,6 +90,19 @@
 
 
 
+  function old($field_name){
+    
+      if (isset($field_name)) {
+      	  
+      	  if (isset($_POST[$field_name])) {
+      	  	  echo $_POST[$field_name];
+      	  }
+      }
+
+  }
+
+
+
 
 
 

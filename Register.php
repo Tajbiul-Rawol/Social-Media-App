@@ -75,11 +75,23 @@
                                 ]);
                         $file_name = $data['file_name'];
                         
-                        $sql = "INSERT INTO users (first_name, last_name, email,username,password,age,gender,photo) VALUES ('$fname','$lname','$email','$uname','$hash_pass','$age','$gender','$file_name') "; 
-                        
-                        $connection -> query($sql);
 
-                        $mess = '<p class="alert alert-success"> registration Complete! <button data-dismiss="alert" class="close"> &times; </button></p>';
+                        if (!empty($data['mess'])) {
+                              
+                               $mess = $data['mess'];
+                        }else{
+                           
+                           $sql = "INSERT INTO users (first_name, last_name, email,username,password,age,gender,photo) VALUES ('$fname','$lname','$email','$uname','$hash_pass','$age','$gender','$file_name') "; 
+                        
+                            $connection -> query($sql);
+
+                            $mess = '<p class="alert alert-success"> registration Complete! <button data-dismiss="alert" class="close"> &times; </button></p>';
+                            
+                            header("location:register.php");
+
+                        }
+                        
+                        
 
 
             }
@@ -110,43 +122,43 @@
                  	 
                       <div class="form-group">
                       	<label for=""> First Name</label>
-                      	<input class="form-control" type="text" value="" name="fname">
+                      	<input class="form-control" type="text" value="<?php old('fname'); ?>" name="fname">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for=""> Last Name</label>
-                      	<input class="form-control" type="text" value="" name="lname">
+                      	<input class="form-control" type="text" value="<?php old('lname'); ?>" name="lname">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for=""> Email</label>
-                      	<input class="form-control" type="text" value="" name="email">
+                      	<input class="form-control" type="text" value="<?php old('email'); ?>" name="email">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for=""> Username</label>
-                      	<input class="form-control" type="text" value="" name="uname">
+                      	<input class="form-control" type="text" value="<?php old('uname'); ?>" name="uname">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for="">Password</label>
-                      	<input class="form-control" type="password" value="" name="pass">
+                      	<input class="form-control" type="password"  name="pass">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for="">Confirm password</label>
-                      	<input class="form-control" type="password" value="" name="cpass">
+                      	<input class="form-control" type="password"  name="cpass">
                       	
                       </div>
 
                       <div class="form-group">
                         <label for="">Age</label>
-                        <input class="form-control" type="text" value="" name="age">
+                        <input class="form-control" type="text" value="<?php old('age'); ?>" name="age">
                         
                       </div>
 
