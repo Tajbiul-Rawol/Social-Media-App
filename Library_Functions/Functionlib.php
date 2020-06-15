@@ -68,10 +68,26 @@
       ];
 
 
-
-
-
     }
+
+
+
+  function dataCheck($conn, $col_name , $data, $table){
+          
+          $sql = "SELECT $col_name FROM $table WHERE $col_name= '$data' ";
+          $data = $conn -> query($sql);
+          $row_cnt = $data -> num_rows;
+          
+          if ($row_cnt > 0) {
+          	  return false;
+          }else{
+          	  return true;
+          }
+
+
+ 
+  }
+
 
 
 

@@ -36,6 +36,13 @@
                   //hash password
                   $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
+                   //check username
+                  $check_user = dataCheck($connection, 'username', $uname, 'users');  
+                   
+                   //check email
+                  $check_email = dataCheck($connection, 'email', $email, 'users');
+
+                   
                    // photo file
                   $photo = $_FILES['photo'];
             }
@@ -52,6 +59,14 @@
             }elseif ($confirm_pass == false) {
                  
                  $mess = '<p class="alert alert-danger"> password doesnt match! <button data-dismiss="alert" class="close"> &times; </button></p>'; 
+
+            }elseif ($check_user == false) {
+                 
+                 $mess = '<p class="alert alert-danger"> Username already taken! <button data-dismiss="alert" class="close"> &times; </button></p>'; 
+
+            }elseif ($check_email == false) {
+                 
+                 $mess = '<p class="alert alert-danger"> Email already taken! <button data-dismiss="alert" class="close"> &times; </button></p>'; 
 
             }else{
 
@@ -95,43 +110,43 @@
                  	 
                       <div class="form-group">
                       	<label for=""> First Name</label>
-                      	<input class="form-control" type="text" name="fname">
+                      	<input class="form-control" type="text" value="" name="fname">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for=""> Last Name</label>
-                      	<input class="form-control" type="text" name="lname">
+                      	<input class="form-control" type="text" value="" name="lname">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for=""> Email</label>
-                      	<input class="form-control" type="text" name="email">
+                      	<input class="form-control" type="text" value="" name="email">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for=""> Username</label>
-                      	<input class="form-control" type="text" name="uname">
+                      	<input class="form-control" type="text" value="" name="uname">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for="">Password</label>
-                      	<input class="form-control" type="password" name="pass">
+                      	<input class="form-control" type="password" value="" name="pass">
                       	
                       </div>
 
                       <div class="form-group">
                       	<label for="">Confirm password</label>
-                      	<input class="form-control" type="password" name="cpass">
+                      	<input class="form-control" type="password" value="" name="cpass">
                       	
                       </div>
 
                       <div class="form-group">
                         <label for="">Age</label>
-                        <input class="form-control" type="text" name="age">
+                        <input class="form-control" type="text" value="" name="age">
                         
                       </div>
 
