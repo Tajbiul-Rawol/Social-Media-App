@@ -12,7 +12,7 @@
 <body>
 	
 	
-    <a class="btn btn-success btn-sm" href="index.php">Add students</a>
+    <a class="btn btn-success btn-sm" href="Profile.php">Own Profile</a>
 	<div class="wrap-table shadow">
 		<div class="card">
 			<div class="card-body">
@@ -30,8 +30,8 @@
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Email</th>
+							<th>Username</th>
 							<th>Age</th>
-							<th>Location</th>
 							<th>Gender</th>
 							<th>Photo</th>
 							<th>Action</th>
@@ -46,7 +46,7 @@
                                      $search = $_POST['search'];
                                  }
 
-                                $sql = "SELECT * FROM students WHERE location='$search' OR gender='$search' OR email='$search' OR firstname LIKE '%$search%' OR lastname LIKE '%$search%' ";
+                                $sql = "SELECT * FROM users WHERE username='$search' OR gender='$search' OR email='$search' OR first_name LIKE '%$search%' OR last_name LIKE '%$search%' ";
                                 $student_data = $connection -> query($sql);
                                 
                                 $i = 1; 
@@ -57,13 +57,13 @@
 
 						<tr>
 							<td><?php echo $i; $i++; ?></td>
-							<td><?php echo $single_data['firstname'] ?></td>
-							<td><?php echo $single_data['lastname'] ?></td>
+							<td><?php echo $single_data['first_name'] ?></td>
+							<td><?php echo $single_data['last_name'] ?></td>
 							<td><?php echo $single_data['email'] ?></td>
+							<td><?php echo $single_data['username'] ?></td>
 							<td><?php echo $single_data['age'] ?></td>
-							<td><?php echo $single_data['location'] ?></td>
 							<td><?php echo $single_data['gender'] ?></td>
-							<td><img  style="width: 150px;"src="photos/<?php echo $single_data['files'] ?>" alt=""></td>
+							<td><img  style="width: 150px;"src="photos/<?php echo $single_data['photo'] ?>" alt=""></td>
 							<td>
 								<a class="btn btn-sm btn-info" href="single-student.php?id=<?php echo $single_data['id'] ?>">View</a>
 								<a class="btn btn-sm btn-warning" href="edit.php?id=<?php echo $single_data['id'] ?>">Edit</a>

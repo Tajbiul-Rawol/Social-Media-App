@@ -104,7 +104,7 @@
 
    	   
    	   	
-           
+           <a  class="btn btn-success btn-sm" href="index.php">Log in</a>
    	   	  <div class="card shadow">
    	      	
    	      	<div class="card-header">
@@ -118,6 +118,8 @@
 
 
                    ?>
+
+
                  <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="POST"  enctype="multipart/form-data">
                  	 
                       <div class="form-group">
@@ -185,6 +187,8 @@
                       </div>
 
                  </form>
+
+                     
 
    	      	</div>
 
