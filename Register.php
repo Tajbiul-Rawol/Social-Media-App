@@ -48,10 +48,12 @@
             }
 
             
+            $msg = '';
 
             if (empty($fname)|| empty($lname) || empty($email) || empty($uname) || empty($pass) || empty($cpass) || empty($age) || empty($gender) || empty($photo)) {
               
                  $mess = '<p class="alert alert-danger"> All fields required! <button data-dismiss="alert" class="close"> &times; </button></p>';
+
 
             }elseif (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
                  
@@ -83,9 +85,9 @@
                            
                            $sql = "INSERT INTO users (first_name, last_name, email,username,password,age,gender,photo) VALUES ('$fname','$lname','$email','$uname','$hash_pass','$age','$gender','$file_name') "; 
                         
-                            $connection -> query($sql);
+                            $user_data = $connection -> query($sql);
 
-                            $mess = '<p class="alert alert-success"> registration Complete! <button data-dismiss="alert" class="close"> &times; </button></p>';
+                            setMsg("Registration Successful!");
                             
                             header("location:register.php");
 
@@ -116,7 +118,7 @@
                              echo $mess;
                          }
 
-
+                         getMsg();
                    ?>
 
 

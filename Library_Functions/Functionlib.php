@@ -49,7 +49,7 @@
 
         if (in_array($file_extension, $file_format) == false) {
         	
-             $mess =  '<p class="alert alert-danger"> All fields required! <button data-dismiss="alert" class="close"> &times; </button></p>';
+             $mess =  '<p class="alert alert-danger"> incorrect data format! <button data-dismiss="alert" class="close"> &times; </button></p>';
 
              //echo "not uploaded";
         }
@@ -76,8 +76,11 @@
           
           $sql = "SELECT $col_name FROM $table WHERE $col_name= '$data' ";
           $data = $conn -> query($sql);
-          $row_cnt = $data -> num_rows;
           
+          //returns the number of rows for the same data
+          $row_cnt = $data -> num_rows;
+
+          //checks if the number of row is greater than 0 then returns false
           if ($row_cnt > 0) {
           	  return false;
           }else{
@@ -101,6 +104,21 @@
 
   }
 
+
+///fash message 
+ function setMsg($msg){
+
+ 	  setcookie('msg',$msg,time() + 10);
+ }
+
+ function getMsg(){
+
+     if (isset($_COOKIE['msg'])) {
+     		
+     	echo '<p class="alert alert-success">'.$_COOKIE['msg'].'<button data-dismiss="alert" class="close"> &times; </button></p>';
+     }
+ 	 
+ }
 
 
 
