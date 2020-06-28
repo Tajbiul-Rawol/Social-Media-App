@@ -1,6 +1,50 @@
 <?php include_once "library_Functions/db.php"; ?>
 <?php include_once "library_Functions/Functionlib.php"; ?>
 
+<?php 
+      
+      session_start();
+
+     /**
+      * relogin system using cookie
+      */
+
+      if ( isset($_COOKIE['user_login_id']) ) {
+          
+          $user_id = $_COOKIE['user_login_id'];
+          $sql = "SELECT * FROM users WHERE id = '$user_id'";
+          $data = $connection -> query($sql);
+          $login_user_data = $data -> fetch_assoc();
+          
+          /**
+           * set session data for relogin
+           */
+          $_SESSION['id'] =  $login_user_data['id'] ;
+          $_SESSION['first_name'] =  $login_user_data['first_name'] ;
+          $_SESSION['last_name'] =  $login_user_data['last_name'] ;
+          $_SESSION['email'] =  $login_user_data['email'] ;
+          $_SESSION['age'] =  $login_user_data['age'] ; 
+          $_SESSION['photo'] =  $login_user_data['photo'] ;
+
+          /**
+           * redirect to profile page
+           */
+          header('location:profilepage.php');
+
+
+      }
+
+
+    /**
+     * Check if session is set to not allow Index page access when user is already logged in
+     */
+    if (isset($_SESSION['id']) AND isset($_SESSION['first_name']) AND isset($_SESSION['email']) ) {
+      
+      header('location:profilepage.php');
+    }
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +62,13 @@
             $ue =  $_POST['ue'];
             $pass = $_POST['pass'];
 
+            //validation for the fields
             if (empty($ue) || empty($pass)) {
               
                  $mess = '<p class="alert alert-danger"> All fields required! <button data-dismiss="alert" class="close"> &times; </button></p>';
             }else{
-
+                 
+                 // check using the username or email
                  $sql = "SELECT * FROM users WHERE username='$ue' OR email='$ue' ";
                  $data = $connection -> query($sql);
                  $login_user_data = $data -> fetch_assoc();
@@ -33,12 +79,32 @@
                    
                  if ($count == 1 ) {
                       
-                     
+                     // if the user count is 1 it means found, then check the password
                      $pass_verify = password_verify($pass , $login_user_data['password'] ); 
                       
                      if ($pass_verify == true) {
-                       
-                         header('location:Profile.php');
+                         
+                         //pass the data into the session to acess and show profile info
+                        
+                    
+                         $_SESSION['id'] =  $login_user_data['id'] ;
+                         $_SESSION['first_name'] =  $login_user_data['first_name'] ;
+                         $_SESSION['last_name'] =  $login_user_data['last_name'] ;
+                         $_SESSION['email'] =  $login_user_data['email'] ;
+                         $_SESSION['age'] =  $login_user_data['age'] ; 
+                         $_SESSION['photo'] =  $login_user_data['photo'] ;  
+                         
+
+                         /**
+                          * set cookie value 
+                          */
+
+                         setcookie('user_login_id', $login_user_data['id'], time() + (60*60*24*365*2) );
+
+                         /**
+                          * redirect to profile page
+                          */
+                         header('location:profilepage.php');
                      }else{
 
                          $mess = '<p class="alert alert-danger"> Wrong password! <button data-dismiss="alert" class="close"> &times; </button></p>';

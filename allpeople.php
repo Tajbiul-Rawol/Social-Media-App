@@ -1,4 +1,7 @@
 <?php include_once "Library_Functions/db.php"; ?>
+<?php include_once "Library_Functions/Functionlib.php"; ?>
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +15,7 @@
 <body>
 	
 	
-    <a class="btn btn-success btn-sm" href="Profile.php">Own Profile</a>
+    <a class="btn btn-success btn-sm" href="profilepage.php">Own Profile</a>
 	<div class="wrap-table shadow">
 		<div class="card">
 			<div class="card-body">
@@ -66,8 +69,11 @@
 							<td><img  style="width: 150px;"src="photos/<?php echo $single_data['photo'] ?>" alt=""></td>
 							<td>
 								<a class="btn btn-sm btn-info" href="single-student.php?id=<?php echo $single_data['id'] ?>">View</a>
+
+                              <?php if ($single_data['id'] == $_SESSION['id']) : ?>
 								<a class="btn btn-sm btn-warning" href="edit.php?id=<?php echo $single_data['id'] ?>">Edit</a>
 								<a id="delete" class="btn btn-sm btn-danger" href="delete.php?id=<?php echo $single_data['id'] ?>">Delete</a>
+							   <?php endif; ?>
 							</td>
 						</tr>
 						 
